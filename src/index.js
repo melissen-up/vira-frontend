@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Components/App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import store from './redux/store'
+import { Provider } from 'react-redux'
 
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "assets/styles/tailwind.css";
+import 'fontsource-roboto';
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider>
+    <Router store={store}>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
