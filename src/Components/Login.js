@@ -15,7 +15,7 @@ function Login({ setCurrentUser }) {
     };
 
     function handleSubmit(e){
-        e.preventDefault()
+        e.preventDefault();
             fetch("http://localhost:3000/login", {
                     method: "POST",
                     headers: {
@@ -48,7 +48,7 @@ function Login({ setCurrentUser }) {
                     history.push('/home');
     };
 
-    function handleSignup(e) {
+    function onSignupClick(e) {
         history.push('/signup')
     }
 
@@ -69,6 +69,11 @@ function Login({ setCurrentUser }) {
                         <label style={{ "text-align": "left" }}>Password</label>
                         <Input type="password" placeholder="Password" name="password" value={loginInfo.password} onChange ={(e) =>handleChange(e)} />
                     </Form.Field>
+                    {errors.map((error) => (
+                        <p key={error} style={{ color: "red" }}>
+                            {error}
+                        </p>
+                    ))}
                     <Button 
                         type='submit'
                         content='Login'
@@ -82,7 +87,7 @@ function Login({ setCurrentUser }) {
                     content='Sign Up'
                     icon='add'
                     labelPosition='left'
-                    onClick={handleSignup}
+                    onClick={onSignupClick}
                 />
             </Segment>
         </Container>

@@ -68,7 +68,6 @@ function Signup({ setCurrentUser }) {
                         <label style={{ "text-align": "left" }}>Password</label>
                         <Input type="password" placeholder="Password" name="password" value={signupInfo.password} onChange ={(e) =>handleChange(e)} />
                     </Form.Field>
-
                     <Form.Field required>
                         <label style={{ "text-align": "left" }}>First Name</label>
                         <Input type="realname" placeholder="First Name" name="realname" value={signupInfo.realname} onChange ={(e) =>handleChange(e)} />

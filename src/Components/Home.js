@@ -1,44 +1,54 @@
 import { useEffect, useState } from "react";
-import { useHistory, Switch, Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Sidebar from './Sidebar'
-import CategoryContainer from '.CategoryContainer'
+import CreatePractice from './CreatePractice'
+import Dashboard from './Dashboard'
 
-import { Container} from 'semantic-ui-react'
+import { Grid, Button, Segment } from 'semantic-ui-react'
 
 function Home({ setCurrentUser, currentUser }) {
     // const currentUser = useSelector((state) => state.currentUser);
-    const [ poseData, setPoseData ] = useState([])
+    const [ poseData, setPoseData ] = useState([]);
+    const [ catData, setCatData ] = useState([]);
+    const [ showCreate, setShowCreate ] = useState(false);
 
     console.log(currentUser);
 
-    // fetch poses
+     // fetch categories
     useEffect(() => {
-        console.log("Hello");
-    
-        const token = localStorage.getItem("token");
-        if (token) {
-            fetch("http://localhost:3000/pose/index", {
-            headers: {
-            Authorization: `Bearer ${token}`,
-            },
-        })
+        console.log("I'm running?");
+        fetch("http://localhost:3000/category/index")
             .then((r) => r.json())
-            .then((poses) => {
+            .then((categories) => {
               // console.log(poses);
-            setPoseData(poses);
+            setCatData(categories);
             });
-        }
     }, []);
+
+    console.log(poseData);
 
     return(
         <>
-        <Sidebar setCurrentUser={setCurrentUser} currentUser={currentUser} />
-        <Switch >
-            <Route exact path="/create" > 
-                <CategoryContainer currentUser={currentUser} setCurrentUser={setCurrentUser} />
-            </Route> 
-        </Switch>
+            <Grid>
+
+                <Grid.Column width={4}>
+                    <Sidebar setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                </Grid.Column>
+
+                <Grid.Column width={10}>
+                    {   showCreate === false ?
+                        <Dashboard setShowCreate={setShowCreate} /> :
+                        <CreatePractice catData={catData} poseData={poseData} setPoseData={setPoseData} setShowCreate={setShowCreate}/>
+                    }
+                </Grid.Column>
+
+                <Grid.Column width={2}>
+                    
+                </Grid.Column>
+            </Grid>
+        
+        
         </>
 
     );

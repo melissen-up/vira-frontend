@@ -1,6 +1,5 @@
-import { Container, Menu, Label, Input, Image } from 'semantic-ui-react'
+import { Container, Menu, Label, Input, Image, Icon } from 'semantic-ui-react'
 import { useHistory } from "react-router-dom";
-import { Icon } from '@material-ui/core';
 
 function Sidebar({ setCurrentUser, currentUser }) {
     const history = useHistory();
@@ -24,33 +23,46 @@ function Sidebar({ setCurrentUser, currentUser }) {
 
     }
 
+    function handleEditProfile() {
+        
+    }
+
     return (
         <Menu vertical style={{ margin: "10px"}} >
         <Menu.Item
             style={{ "text-align": "center" }}
         >
-            <Image onClick={handleImageClick} src={currentUser.image ?? "https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg"} circular />
+            <Image onClick={handleImageClick} src={currentUser.image ?? "https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg"} circular size='small'/>
             <h3>{currentUser.realname}</h3>
             <p>{currentUser.bio}</p>
         </Menu.Item>
+
         <Menu.Item
-            name='logout'
-            onClick={handleLogout}
+            name='edit'
+            onClick={handleEditProfile}
         >
-        <Label color='teal'>X</Label>
-        Logout
+        <Icon name='edit outline' />
+        Edit Profile
         </Menu.Item>
 
         <Menu.Item
             name='create-practice'
             onClick={createPractice}
         >
-        <Label>>></Label>
+        <Icon name='plus square outline' />
         Create Practice
+        </Menu.Item>
+
+        <Menu.Item
+            name='logout'
+            onClick={handleLogout}
+        >
+        <Icon name='delete' />
+        Logout
         </Menu.Item>
         
         <Menu.Item>
-            <Input icon='search' placeholder='Search mail...' />
+            <Input icon='search' placeholder='Search other users...' />
         </Menu.Item>
         </Menu>
     )
