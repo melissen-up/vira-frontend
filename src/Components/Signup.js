@@ -3,25 +3,28 @@ import { Button, Checkbox, Form, Container, Header, Input, Image, Segment, Divid
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Login({ setCurrentUser }) {
-    // state
-    const [loginInfo, setLoginInfo]= useState({username:"", password:""})
+function Signup({ setCurrentUser }) {
+    const [signupInfo, setSignupInfo]= useState({
+        username:"", 
+        password:"",
+        realname:"" 
+    })
     const history = useHistory();
     const [errors, setErrors] = useState([]);
-    const [signup, setSignup] = useState(false)
+
 
     function handleChange(e) {
-        setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
+        setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
     function handleSubmit(e){
         e.preventDefault()
-            fetch("http://localhost:3000/login", {
+            fetch("http://localhost:3000/signup", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(loginInfo),
+                    body: JSON.stringify(signupInfo),
                     })
                     .then((response) => {
                         if (response.ok) {
@@ -37,7 +40,7 @@ function Login({ setCurrentUser }) {
                         setCurrentUser(data.teacher);
                         // save the token!
                         localStorage.setItem("token", data.token);
-                        setLoginInfo({username:"", password:""});
+                        
                         setErrors([]);
                         // callGetOthersUseEffect(data.user);
                     })
@@ -48,46 +51,40 @@ function Login({ setCurrentUser }) {
                     history.push('/home');
     };
 
-    function handleSignup(e) {
-        history.push('/signup')
-    }
-
-    return(
+    return (
         <>
         <Container>
             <Segment textAlign='center'>
                 <Header as='h2' icon textAlign='center'>
                     <Image src="../assets/vira-logo.png" />
-                    <Header.Content>Login</Header.Content>
+                    <Header.Content>Signup</Header.Content>
                 </Header>
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Form.Field required>
                         <label style={{ "text-align": "left" }}>Username</label>
-                        <Input placeholder='Username' name="username" value={loginInfo.username} onChange ={(e) =>handleChange(e)}/>
+                        <Input placeholder='Username' name="username" value={signupInfo.username} onChange ={(e) =>handleChange(e)}/>
                     </Form.Field>
                     <Form.Field required>
                         <label style={{ "text-align": "left" }}>Password</label>
-                        <Input type="password" placeholder="Password" name="password" value={loginInfo.password} onChange ={(e) =>handleChange(e)} />
+                        <Input type="password" placeholder="Password" name="password" value={signupInfo.password} onChange ={(e) =>handleChange(e)} />
+                    </Form.Field>
+
+                    <Form.Field required>
+                        <label style={{ "text-align": "left" }}>First Name</label>
+                        <Input type="realname" placeholder="First Name" name="realname" value={signupInfo.realname} onChange ={(e) =>handleChange(e)} />
                     </Form.Field>
                     <Button 
                         type='submit'
-                        content='Login'
+                        color='violet'
+                        content='Sign Up'
+                        icon='add'
+                        labelPosition='left'
                     />
                 </Form>
-
-                <Divider horizontal>Or</Divider>
-                
-                <Button
-                    color='violet'
-                    content='Sign Up'
-                    icon='add'
-                    labelPosition='left'
-                    onClick={handleSignup}
-                />
             </Segment>
         </Container>
         </>
     );
 };
 
-export default Login
+export default Signup

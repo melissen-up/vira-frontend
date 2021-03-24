@@ -1,21 +1,34 @@
 // import logo from './logo.svg';
 // import './App.css';
-import { Switch, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Switch, Route, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-// Redux actions
-import { setCurrentUser } from "../redux/currentUserSlice"
+// Redux ish
+// import { setCurrentUser } from "../redux/currentUserSlice"
+// import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import Home from "./Home"
 import Login from "./Login"
+import Signup from "./Signup"
 
 
 function App() {
+  // Redux variables 
+  // const dispatch = useDispatch();
+  // const currentUser = useSelector((state) => state.currentUser);
 
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser);
+  const history = useHistory();
+
+  const [currentUser, setCurrentUser] = useState({
+    username: "",
+    realname: "",
+    image: "https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg",
+    bio: ""
+  });
+
+  console.log(currentUser);
+
   // auto-login
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,24 +40,32 @@ function App() {
       })
         .then((r) => r.json())
         .then((user) => {
-          console.log(user);
-          // response => setCurrentUser
-          dispatch(setCurrentUser({ 
-            username: user.username, 
-            password: user.password, 
-            realname: user.realname,
-            bio: user.bio,
-            image: user.image 
-          }));
+          setCurrentUser(user)
+          history.push("/home");
+          
         })
+    } else {
+      history.push("/login")
     }
-  }, [dispatch]);
+  }, []);
+
+  
+
 
   
   return (
     <Switch >
-      <Route path="/" exact component={Login} />
-      <Route path="/home" component={Home} />
+      <Route exact path="/login" > 
+        <Login setCurrentUser={setCurrentUser} />
+      </Route> 
+
+      <Route exact path="/signup" > 
+        <Signup setCurrentUser={setCurrentUser} />
+      </Route> 
+
+      <Route path="/home">
+        <Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
+      </Route>
     </Switch>
   );
 }
