@@ -1,20 +1,22 @@
-import { Button, Image, Modal, Form, Input } from 'semantic-ui-react'
-import { useState } from 'react'
+import { Button, Header, Image, Modal, Form, Input } from 'semantic-ui-react';
+import { useState } from 'react';
 
-function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
-    const [open, setOpen] = useState({modal});
-    const {
-        username,
-        realname,
-        image,
-        bio
-    } = currentUser
-    const [formData, setFormData]= useState({
-        username: username, 
-        realname: realname,
-        bio: bio,
-        image: image
-    })
+function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
+        
+        const [open, setOpen] = useState({modal});
+
+        const {
+            username,
+            realname,
+            image,
+            bio
+        } = currentUser
+        const [formData, setFormData]= useState({
+            username: username, 
+            realname: realname,
+            bio: bio,
+            image: image
+        })
     function handleSubmit() {
         const token = localStorage.getItem("token");
             if (token) {
@@ -86,17 +88,9 @@ function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
                 <Button color='black' onClick={() => setModal(false)}>
                 Cancel
                 </Button>
-                {/* <Button
-                type='submit'
-                content='Update Profile'
-                labelPosition='right'
-                icon='checkmark'
-                onClick={() => setModal(false)}
-                positive
-                /> */}
             </Modal.Actions>
         </Modal>
-    );
+    )
 };
 
-export default EditProfileModal
+export default CreatePracticeModal

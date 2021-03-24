@@ -12,8 +12,7 @@ function PoseCard({ pose, addPracticeCard }) {
         name_sanskrit
     } = pose
 
-    function handleClick(e) {
-        console.log(e);
+    function handleClick() {
         addPracticeCard(pose)
     }
 

@@ -9,7 +9,7 @@ import { Grid, Button, Segment } from 'semantic-ui-react'
 
 function Home({ setCurrentUser, currentUser }) {
     // const currentUser = useSelector((state) => state.currentUser);
-    const [ poseData, setPoseData ] = useState([]);
+    
     const [ catData, setCatData ] = useState([]);
     const [ showCreate, setShowCreate ] = useState(false);
 
@@ -26,8 +26,6 @@ function Home({ setCurrentUser, currentUser }) {
             });
     }, []);
 
-    console.log(poseData);
-
     return(
         <>
             <Grid>
@@ -39,7 +37,7 @@ function Home({ setCurrentUser, currentUser }) {
                 <Grid.Column width={10}>
                     {   showCreate === false ?
                         <Dashboard setShowCreate={setShowCreate} /> :
-                        <CreatePractice catData={catData} poseData={poseData} setPoseData={setPoseData} setShowCreate={setShowCreate}/>
+                        <CreatePractice currentUser={currentUser} setCurrentUser={setCurrentUser} catData={catData} setShowCreate={setShowCreate}/>
                     }
                 </Grid.Column>
 
