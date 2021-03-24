@@ -6,7 +6,7 @@ function CategoryContainer({ catData, handleCategoryClick }) {
 
     const categories = []
     const catCard = catData.map((category) => {
-        return <CategoryCard key={category.id} category={category} onClick={() => handleCategoryClick(category.id)} />
+        return <CategoryCard key={category.id} category={category} handleCategoryClick={handleCategoryClick} />
     })
 
     // const CardExampleGroupCentered = () => <Card.Group centered items={items} />

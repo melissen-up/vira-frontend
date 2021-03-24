@@ -1,4 +1,4 @@
-import { Button, Header, Image, Modal, Form, Input } from 'semantic-ui-react';
+import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 import { useState } from 'react';
 
 function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
@@ -6,16 +6,12 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
         const [open, setOpen] = useState({modal});
 
         const {
-            username,
-            realname,
-            image,
-            bio
+            id
         } = currentUser
+
         const [formData, setFormData]= useState({
-            username: username, 
-            realname: realname,
-            bio: bio,
-            image: image
+            teacher_id: id
+
         })
     function handleSubmit() {
         const token = localStorage.getItem("token");
@@ -50,34 +46,22 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
         >
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
-                <Image size='small' src={formData.image} alt={username} wrapped />
                 <Modal.Description>
                 <Form onSubmit={(e) => handleSubmit(e)}>
-
                     <Form.Field required>
-                        <label style={{ "text-align": "left" }}>Username</label>
-                        <Input placeholder='Username' name="username" value={formData.username} onChange ={(e) =>handleChange(e)}/>
+                        <label style={{ "text-align": "left" }}>Practice Name</label>
+                        <Input placeholder='Practice Name' name="name" value={formData.username} onChange ={(e) =>handleChange(e)}/>
                     </Form.Field>
                     
                     <Form.Field required>
                         <label style={{ "text-align": "left" }}>First Name</label>
-                        <Input type="realname" placeholder="First Name" name="realname" value={formData.realname} onChange ={(e) =>handleChange(e)} />
-                    </Form.Field>
-                    
-                    <Form.Field >
-                        <label style={{ "text-align": "left" }}>Bio</label>
-                        <Input type="text" placeholder="Bio" name="bio" value={formData.bio} onChange ={(e) =>handleChange(e)} />
-                    </Form.Field>
-
-                    <Form.Field required>
-                        <label style={{ "text-align": "left" }}>Image Address</label>
-                        <Input placeholder="http://" name="image" value={formData.image} onChange ={(e) =>handleChange(e)} />
+                        <TextArea placeholder="Describe your practice . . . " name="description" value={formData.description} onChange ={(e) =>handleChange(e)} />
                     </Form.Field>
 
                     <Button 
                         type='submit'
                         color='violet'
-                        content='Update Profile'
+                        content='Create Practice'
                         icon='add'
                         labelPosition='left'
                     />

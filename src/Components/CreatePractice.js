@@ -10,19 +10,25 @@ import CreatePracticeModal from "./CreatePracticeModal";
 
 function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser }) {
 
-    const [ clickedCat, setClickedCat ] = useState(2);
+    const [ clickedCat, setClickedCat ] = useState(0);
     const [ practiceCards, setPracticeCards ] = useState([]);
     const [ modal, setModal ] = useState(false)
     const [ poseData, setPoseData ] = useState([]);
 
-    function handleCategoryClick() {
-        fetch(`http://localhost:3000/category/${clickedCat}`)
+    function handleCategoryClick(id) {
+        var updatedCat = {...clickedCat}
+        updatedCat = id
+        setClickedCat(updatedCat)
+        console.log(clickedCat);
+        
+        fetch(`http://localhost:3000/category/1`)
             .then((r) => r.json())
             .then((cat) => {
               // console.log(poses);
             setPoseData(cat.poses);
             });
     }
+ 
 
     function addPracticeCard(pose) {
         const newArr = [...practiceCards, pose]
@@ -49,15 +55,15 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser })
 
     return (
         <>
-        { modal === true ? <CreatePracticeModal currentUser={currentUser} setCurrentUser={setCurrentUser} modal={modal} setModal={setModal} /> : null}
+        { modal === true ? <CreatePracticeModal currentUser={currentUser} setCurrentUser={setCurrentUser} modal={modal} setModal={setModal} practiceCards={practiceCards} /> : null}
         <CategoryContainer catData={catData} handleCategoryClick={handleCategoryClick} />
 
-        <div style={{ 'text-align': 'center'}}>
+        {/* <div style={{ 'text-align': 'center'}}>
             <Button 
                 onClick={handleCategoryClick}
                 content='Click for Poses'
             />
-        </div>
+        </div> */}
                     
         <Segment padded>
             <Header as='h2'>Practice</Header>

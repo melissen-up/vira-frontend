@@ -3,7 +3,7 @@ import { Card, Button } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
 
-function CategoryCard({ category }) {
+function CategoryCard({ category, handleCategoryClick }) {
     const history = useHistory();
 
     const {
@@ -13,6 +13,7 @@ function CategoryCard({ category }) {
 
     return (
         <Button
+            onClick={() => handleCategoryClick(id)}
             style={{ 'text-align': 'center', margin: '5px'  }}
             raised
             color='yellow'
