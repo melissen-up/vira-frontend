@@ -22,12 +22,15 @@ function CreatePractice({ setPoseData, poseData, catData, setShowCreate }) {
 
     return (
         <>
+        
         <CategoryContainer catData={catData} handleCategoryClick={handleCategoryClick} />
 
-        <Button 
-            onClick={handleCategoryClick}
-            content='Click for Poses'
-        />
+        <div style={{ 'text-align': 'center'}}>
+            <Button 
+                onClick={handleCategoryClick}
+                content='Click for Poses'
+            />
+        </div>
                     
         <Segment>
             <PracticeBuild />
