@@ -27,6 +27,20 @@ function Sidebar({ setCurrentUser, currentUser }) {
         setModal((modal) => !modal)
     }
 
+    const handleShowUserPractices = {
+        
+    }
+
+    // <> <Menu.Item
+    //         style={{ color: 'white' }}
+    //         name='edit'
+    //         onClick={handleEditProfile}
+    //         >
+    //         <Icon name='edit outline' />
+    //         Edit Profile
+    //         </Menu.Item>
+    //     </>
+
     return (
         <>
             { modal === true ? <EditProfileModal modal={modal} setModal={setModal} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : null }
@@ -49,8 +63,17 @@ function Sidebar({ setCurrentUser, currentUser }) {
                 name='edit'
                 onClick={handleEditProfile}
             >
-            <Icon name='edit outline' />
+            <Icon name='edit' />
             Edit Profile
+            </Menu.Item>
+
+            <Menu.Item
+                style={{ color: 'white' }}
+                name='show'
+                onClick={handleShowUserPractices}
+            >
+            <Icon name='plus' />
+            Saved Practices
             </Menu.Item>
 
             <Menu.Item

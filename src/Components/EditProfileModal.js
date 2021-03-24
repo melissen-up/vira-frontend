@@ -1,4 +1,4 @@
-import { Button, Image, Modal, Form, Input } from 'semantic-ui-react'
+import { Button, Image, Modal, Form, Input, TextArea } from 'semantic-ui-react'
 import { useState } from 'react'
 
 function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
@@ -44,6 +44,7 @@ function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
+            size='tiny'
             // trigger={<Button>Show Modal</Button>}
         >
             <Modal.Header>Update Profile</Modal.Header>
@@ -64,7 +65,7 @@ function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
                     
                     <Form.Field >
                         <label style={{ "text-align": "left" }}>Bio</label>
-                        <Input type="text" placeholder="Bio" name="bio" value={formData.bio} onChange ={(e) =>handleChange(e)} />
+                        <TextArea placeholder="Bio" name="bio" value={formData.bio} onChange ={(e) =>handleChange(e)} />
                     </Form.Field>
 
                     <Form.Field required>

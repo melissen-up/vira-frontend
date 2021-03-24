@@ -13,24 +13,25 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
             teacher_id: id
 
         })
-    function handleSubmit() {
-        const token = localStorage.getItem("token");
-            if (token) {
-            fetch("http://localhost:3000/current-user", {
-                method: "PATCH",
-                headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(formData),
-                })
-                .then((r) => r.json())
-                .then((user) => {
-                // response => update the user in state
-                setCurrentUser(user);
-                setModal(false)
-                });
-            }
+    function handleSubmit(e) {
+        console.log("Practice Created");
+        // const token = localStorage.getItem("token");
+        //     if (token) {
+        //     fetch("http://localhost:3000/current-user", {
+        //         method: "PATCH",
+        //         headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: `Bearer ${token}`,
+        //         },
+        //         body: JSON.stringify(formData),
+        //         })
+        //         .then((r) => r.json())
+        //         .then((user) => {
+        //         // response => update the user in state
+        //         setCurrentUser(user);
+        //         setModal(false)
+        //         });
+        //     }
     };
 
     function handleChange(e) {
@@ -44,7 +45,7 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
             open={open}
             // trigger={<Button>Show Modal</Button>}
         >
-            <Modal.Header>Update Profile</Modal.Header>
+            <Modal.Header>Create Practice</Modal.Header>
             <Modal.Content image>
                 <Modal.Description>
                 <Form onSubmit={(e) => handleSubmit(e)}>
@@ -54,7 +55,7 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
                     </Form.Field>
                     
                     <Form.Field required>
-                        <label style={{ "text-align": "left" }}>First Name</label>
+                        <label style={{ "text-align": "left" }}>Practice Description</label>
                         <TextArea placeholder="Describe your practice . . . " name="description" value={formData.description} onChange ={(e) =>handleChange(e)} />
                     </Form.Field>
 
