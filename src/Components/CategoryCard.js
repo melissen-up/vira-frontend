@@ -1,4 +1,4 @@
-import { Card } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
 
 import { useHistory } from 'react-router-dom'
 
@@ -12,12 +12,11 @@ function CategoryCard({ category }) {
     } = category
 
     return (
-        <Card
-            link
-            style={{ 'text-align': 'center' }}
+        <Button
+            style={{ 'text-align': 'center', margin: '5px'  }}
             raised
-            color='violet'
-            header={ name } 
+            color='yellow'
+            content={ name } 
         />
     )
 };

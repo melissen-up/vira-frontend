@@ -1,9 +1,9 @@
-import { Card } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
 
 import { useHistory } from 'react-router-dom'
 
 
-function PoseCard({ pose }) {
+function PoseCard({ pose, addPracticeCard }) {
     const history = useHistory();
 
     const {
@@ -12,13 +12,17 @@ function PoseCard({ pose }) {
         name_sanskrit
     } = pose
 
+    function handleClick(e) {
+        console.log(e);
+        addPracticeCard(pose)
+    }
+
     return (
-        <Card
-            link
-            style={{ 'text-align': 'center' }}
-            raised
+        <Button
+            onClick={() => handleClick()}
+            style={{ 'text-align': 'center', margin: '5px' }}
             color='violet'
-            header={ name_english }
+            content={ name_english }
             description={ name_sanskrit }
 
         />

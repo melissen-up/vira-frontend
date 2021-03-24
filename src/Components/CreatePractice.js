@@ -4,12 +4,13 @@ import CategoryContainer from './CategoryContainer'
 import PoseContainer from './PoseContainer'
 import PracticeBuild from './PracticeBuild'
 
-import { Segment, Button } from 'semantic-ui-react'
+import { Segment, Button, Header, Card } from 'semantic-ui-react'
 
 
 function CreatePractice({ setPoseData, poseData, catData, setShowCreate }) {
 
     const [ clickedCat, setClickedCat ] = useState(2);
+    const [ practiceCards, setPracticeCards ] = useState([]);
 
     function handleCategoryClick() {
         fetch(`http://localhost:3000/category/${clickedCat}`)
@@ -20,9 +21,21 @@ function CreatePractice({ setPoseData, poseData, catData, setShowCreate }) {
             });
     }
 
+    function addPracticeCard(pose) {
+        const newArr = [...practiceCards, pose]
+        setPracticeCards(newArr)
+    }
+
+    const practicePoseCards = practiceCards.map((pCard) => {
+        return <Card 
+                raised header={pCard.name_english} 
+                description={pCard.name_sanskrit} 
+            />
+    })
+
     return (
         <>
-        
+
         <CategoryContainer catData={catData} handleCategoryClick={handleCategoryClick} />
 
         <div style={{ 'text-align': 'center'}}>
@@ -32,17 +45,21 @@ function CreatePractice({ setPoseData, poseData, catData, setShowCreate }) {
             />
         </div>
                     
-        <Segment>
-            <PracticeBuild />
+        <Segment padded>
+            <Header as='h2'>Practice</Header>
+            <Card.Group itemsPerRow={4}>
+                {practicePoseCards === [] ? null : practicePoseCards }
+            </Card.Group>
         </Segment>
 
         { clickedCat !== [] ?
-        <PoseContainer poseData={poseData} /> :
+        <PoseContainer poseData={poseData} addPracticeCard={addPracticeCard} /> :
         null }
 
-        <Segment>
+        <Segment >
             <div style={{ 'text-align': 'center'}}>
-                <Button 
+                <Button
+                    secondary
                     onClick={() => setShowCreate(false)}
                     content='Cancel without Saving'
                     color='violet'

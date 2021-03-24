@@ -1,14 +1,12 @@
-import { Grid, Icon, Accordion, Segment, Button  } from 'semantic-ui-react'
+import { Grid, Icon, Accordion, Segment, Button, Form, Radio  } from 'semantic-ui-react'
 import { useState } from "react";
 
 import _ from 'lodash'
 import { IconButton } from '@material-ui/core';
 
 function PracticeBuild() {
-
-    const [ showAccordian, setShowAccordian ] = useState(false);
     const [ accordPanels, setAccordPanels ] = useState(0);
-    const [ activeIndex, setActiveIndex ] = useState(0);
+    const [ radioBtn, setRadioBtn ] = useState();
 
 
     const templates = [
@@ -45,23 +43,24 @@ function PracticeBuild() {
     //     </Grid.Column>
     // ))
 
-    function onAddCategory() {
-        setAccordPanels((accordPanels) => accordPanels + 1)
-        handleAddPanel();
-    };
+    // function onAddCategory() {
+    //     setAccordPanels((accordPanels) => accordPanels + 1)
+    //     handleAddPanel();
+    // };
 
-    function handleAddPanel() {
-        console.log("Yo!");
-    };
+    // function handleAddPanel() {
+    //     console.log("Yo!");
+    // };
 
     console.log(accordPanels);
     return (
         <>
             <h1>Practice Build Line</h1>
 
+
             {/* <Grid>{columns}</Grid> */}
             
-                <Icon onClick={onAddCategory} link name='plus square' size='big' />
+                {/* <Icon onClick={onAddCategory} link name='plus square' size='big' />
                 
                 { showAccordian ?
                     <Segment secondary>
@@ -78,11 +77,11 @@ function PracticeBuild() {
                         activeIndex={activeIndex}
                         panels={accordPanels}
                         onTitleClick={this.handleTitleClick}
-                        />
+                        /> */}
 
-                    </Segment> :
+                    {/* </Segment> :
                     null
-                }
+                } */}
         </>
     );
 };

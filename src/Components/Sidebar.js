@@ -52,14 +52,6 @@ function Sidebar({ setCurrentUser, currentUser }) {
             </Menu.Item>
 
             <Menu.Item
-                name='create-practice'
-                onClick={createPractice}
-            >
-            <Icon name='plus square outline' />
-            Create Practice
-            </Menu.Item>
-
-            <Menu.Item
                 name='logout'
                 onClick={handleLogout}
             >

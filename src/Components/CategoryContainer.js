@@ -1,4 +1,4 @@
-import { Card, Container } from 'semantic-ui-react'
+import { Card, Container, Header } from 'semantic-ui-react'
 
 import CategoryCard from './CategoryCard'
 
@@ -12,7 +12,8 @@ function CategoryContainer({ catData, handleCategoryClick }) {
     // const CardExampleGroupCentered = () => <Card.Group centered items={items} />
 
     return (
-        <Container>
+        <Container style={{ margin: '50px'}}>
+            <Header as='h2'>Pose Categories</Header>
             <Card.Group centered itemsPerRow={5}>
                 {catCard}
             </Card.Group>
