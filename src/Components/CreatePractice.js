@@ -15,20 +15,14 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser })
     const [ modal, setModal ] = useState(false)
     const [ poseData, setPoseData ] = useState([]);
 
-    function handleCategoryClick(id) {
-        var updatedCat = {...clickedCat}
-        updatedCat = id
-        setClickedCat(updatedCat)
-        console.log(clickedCat);
-        
-        fetch(`http://localhost:3000/category/1`)
+    function handleCategoryClick(id) {        
+        fetch(`http://localhost:3000/category/${id}`)
             .then((r) => r.json())
             .then((cat) => {
               // console.log(poses);
             setPoseData(cat.poses);
             });
-    }
- 
+    };
 
     function addPracticeCard(pose) {
         const newArr = [...practiceCards, pose]

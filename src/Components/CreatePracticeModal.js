@@ -1,37 +1,52 @@
 import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 
-function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
+function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, practiceCards }) {
         
-        const [open, setOpen] = useState({modal});
+    const [open, setOpen] = useState({modal});
+    const history = useHistory();
 
-        const {
-            id
-        } = currentUser
+    const {
+        id
+    } = currentUser
 
-        const [formData, setFormData]= useState({
-            teacher_id: id
+    const [formData, setFormData]= useState({
+        teacher_id: currentUser.id,
+        poses: practiceCards,
+        description: "", 
+        name: ""
+    });
 
-        })
     function handleSubmit(e) {
-        console.log("Practice Created");
-        // const token = localStorage.getItem("token");
-        //     if (token) {
-        //     fetch("http://localhost:3000/current-user", {
-        //         method: "PATCH",
-        //         headers: {
-        //         "Content-Type": "application/json",
-        //         Authorization: `Bearer ${token}`,
-        //         },
-        //         body: JSON.stringify(formData),
-        //         })
-        //         .then((r) => r.json())
-        //         .then((user) => {
-        //         // response => update the user in state
-        //         setCurrentUser(user);
-        //         setModal(false)
-        //         });
-        //     }
+        console.log("In handleSubmit");
+        const token = localStorage.getItem("token");
+            if (token) {
+            fetch("http://localhost:3000/practice/new", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(formData),
+                })
+                .then((r) => r.json())
+                .then((practice) => {
+                setModal(false)
+                setFormData(
+                    {
+                        teacher_id: "",
+                        poses: practiceCards,
+                        description: "", 
+                        name: ""
+                    }
+                )
+                history.push("/")
+                });
+            } else {
+                console.log("No Token");
+            }
+        
     };
 
     function handleChange(e) {
@@ -51,7 +66,7 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser }) {
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Form.Field required>
                         <label style={{ "text-align": "left" }}>Practice Name</label>
-                        <Input placeholder='Practice Name' name="name" value={formData.username} onChange ={(e) =>handleChange(e)}/>
+                        <Input placeholder='Practice Name' name="name" value={formData.name} onChange ={(e) =>handleChange(e)}/>
                     </Form.Field>
                     
                     <Form.Field required>

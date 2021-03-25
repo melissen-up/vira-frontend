@@ -52,7 +52,7 @@ function PracticeBuild() {
     //     console.log("Yo!");
     // };
 
-    console.log(accordPanels);
+
     return (
         <>
             <h1>Practice Build Line</h1>

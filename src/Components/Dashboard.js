@@ -1,8 +1,10 @@
 
 import { Button, Segment } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
 
 
 function Dashboard({ setShowCreate }) {
+    const history = useHistory();
 
     return (
         <>
@@ -14,7 +16,7 @@ function Dashboard({ setShowCreate }) {
 
             <Segment textAlign='center'>
                 <Button 
-                    onClick={() => setShowCreate(true)}
+                    onClick={() => history.push("/create-practice")}
                     content='Create New Practice'
                     color='violet'
                 />

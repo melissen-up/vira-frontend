@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 
 import Sidebar from './Sidebar'
 import CreatePractice from './CreatePractice'
@@ -12,12 +12,10 @@ function Home({ setCurrentUser, currentUser }) {
     
     const [ catData, setCatData ] = useState([]);
     const [ showCreate, setShowCreate ] = useState(false);
-
-    console.log(currentUser);
+    const [ showPractice, setShowPractice ] = useState(false);
 
      // fetch categories
     useEffect(() => {
-        console.log("I'm running?");
         fetch("http://localhost:3000/category/index")
             .then((r) => r.json())
             .then((categories) => {
@@ -29,16 +27,25 @@ function Home({ setCurrentUser, currentUser }) {
     return(
         <>
             <Grid>
-
                 <Grid.Column width={4}>
                     <Sidebar setCurrentUser={setCurrentUser} currentUser={currentUser} />
                 </Grid.Column>
 
                 <Grid.Column width={10}>
-                    {   showCreate === false ?
-                        <Dashboard setShowCreate={setShowCreate} /> :
-                        <CreatePractice currentUser={currentUser} setCurrentUser={setCurrentUser} catData={catData} setShowCreate={setShowCreate}/>
-                    }
+                    <Switch>
+                        <Route path="/dashboard">
+                            <Dashboard setShowCreate={setShowCreate} />
+                        </Route>
+                        <Route path="/create-practice">
+                            <CreatePractice currentUser={currentUser} setCurrentUser={setCurrentUser} catData={catData} setShowCreate={setShowCreate}/>
+                        </Route>
+                        <Route path="/practices">
+                            <Practices currentUser={currentUser} />                    
+                        </Route>
+                        <Route path="/practice-show/:id">
+                            <PracticeShow currentUser={currentUser} />                    
+                        </Route>
+                    </Switch>
                 </Grid.Column>
 
                 <Grid.Column width={2}>

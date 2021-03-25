@@ -27,8 +27,6 @@ function App() {
     bio: ""
   });
 
-  console.log(currentUser);
-
   // auto-login
   useEffect(() => {
     const token = localStorage.getItem("token");
