@@ -8,9 +8,17 @@ import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import Home from "./Home"
+// import Home from "./Home"
 import Login from "./Login"
 import Signup from "./Signup"
+import Sidebar from "./Sidebar";
+import CreatePractice from './CreatePractice'
+import Dashboard from './Dashboard'
+import Practices from "./Practices"
+import PracticeShow from "./PracticeShow"
+
+// Styling
+import { Grid } from 'semantic-ui-react'
 
 
 function App() {
@@ -19,7 +27,8 @@ function App() {
   // const currentUser = useSelector((state) => state.currentUser);
 
   const history = useHistory();
-
+  const [ catData, setCatData ] = useState([]);
+  const [ practiceData, setPracticeData ] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     username: "",
     realname: "",
@@ -47,22 +56,67 @@ function App() {
     }
   }, []);
 
+   // fetch categories
+  useEffect(() => {
+      fetch("http://localhost:3000/category/index")
+          .then((r) => r.json())
+          .then((categories) => {
+            // console.log(poses);
+          setCatData(categories);
+          });
+  }, []);
+
+  // fetch practices
+  useEffect(() => {
+      fetch("http://localhost:3000/category/index")
+          .then((r) => r.json())
+          .then((categories) => {
+              // console.log(poses);
+          setCatData(categories);
+          });
+  }, []);
+
 
 
   return (
-    <Switch >
-      <Route exact path="/login" > 
-        <Login setCurrentUser={setCurrentUser} />
-      </Route> 
+    <>
+    <Grid>
+      <Grid.Column width={4}>
+          <Sidebar setCurrentUser={setCurrentUser} currentUser={currentUser} />
+      </Grid.Column>
 
-      <Route exact path="/signup" > 
-        <Signup setCurrentUser={setCurrentUser} />
-      </Route> 
+      <Grid.Column width={10}>
+        <Switch >
+          <Route exact path="/login" > 
+            <Login setCurrentUser={setCurrentUser} />
+          </Route> 
 
-      <Route path="/home">
-        <Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
-      </Route>
-    </Switch>
+          <Route exact path="/signup" > 
+            <Signup setCurrentUser={setCurrentUser} />
+          </Route> 
+
+          <Route path="/home" component={Dashboard}/>
+
+          <Route exact path="/create-practice">
+              <CreatePractice currentUser={currentUser} setCurrentUser={setCurrentUser} catData={catData} />
+          </Route>
+
+          <Route exact path="/practices">
+              <Practices currentUser={currentUser} />                    
+          </Route>
+
+          <Route exact path="/practice-show/:id">
+              <PracticeShow currentUser={currentUser} />                    
+          </Route>
+
+        </Switch>
+      </Grid.Column>
+
+      <Grid.Column width={2} >
+        
+      </Grid.Column>
+    </Grid>
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import CategoryContainer from './CategoryContainer'
 import PoseContainer from './PoseContainer'
@@ -14,6 +15,8 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser })
     const [ practiceCards, setPracticeCards ] = useState([]);
     const [ modal, setModal ] = useState(false)
     const [ poseData, setPoseData ] = useState([]);
+
+    const history = useHistory();
 
     function handleCategoryClick(id) {        
         fetch(`http://localhost:3000/category/${id}`)
@@ -74,7 +77,7 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser })
             <div style={{ 'text-align': 'center'}}>
                 <Button.Group>
                     <Button
-                        onClick={() => setShowCreate(false)}
+                        onClick={() => history.push("/Dashboard")}
                         content='Cancel'
                     />
                     <Button.Or />

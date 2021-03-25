@@ -28,7 +28,7 @@ function Sidebar({ setCurrentUser, currentUser }) {
     }
 
     function handleShowUserPractices() {
-        history.push("/");
+        history.push("/practices");
     }
 
     const practiceBtnLogic = 
