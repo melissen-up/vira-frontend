@@ -9,7 +9,7 @@ import { Segment, Button, Header, Card, Icon } from 'semantic-ui-react'
 import CreatePracticeModal from "./CreatePracticeModal";
 
 
-function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser }) {
+function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, handlePracticeCreate }) {
 
     const [ clickedCat, setClickedCat ] = useState(0);
     const [ practiceCards, setPracticeCards ] = useState([]);
@@ -52,7 +52,7 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser })
 
     return (
         <>
-        { modal === true ? <CreatePracticeModal currentUser={currentUser} setCurrentUser={setCurrentUser} modal={modal} setModal={setModal} practiceCards={practiceCards} /> : null}
+        { modal === true ? <CreatePracticeModal handlePracticeCreate={handlePracticeCreate} currentUser={currentUser} setCurrentUser={setCurrentUser} modal={modal} setModal={setModal} practiceCards={practiceCards} /> : null}
         <CategoryContainer catData={catData} handleCategoryClick={handleCategoryClick} />
 
         {/* <div style={{ 'text-align': 'center'}}>

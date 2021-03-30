@@ -18,7 +18,7 @@ function Dashboard({ setShowCreate }) {
                 <Button 
                     onClick={() => history.push("/create-practice")}
                     content='Create New Practice'
-                    color='violet'
+                    color='yellow'
                 />
             </Segment>
         </>

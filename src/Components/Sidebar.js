@@ -51,13 +51,22 @@ function Sidebar({ setCurrentUser, currentUser }) {
         <>
             { modal === true ? <EditProfileModal modal={modal} setModal={setModal} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : null }
             <Sticky>
-                <Menu vertical style={{ margin: "10px", background: '#5829bb'}} color='violet' >
+                <Menu vertical style={{ margin: "10px", background: '#5829bb'}} >
                     <Menu.Item 
                         style={{ "text-align": "center", color: 'white' }}
                     >
                         <Image onClick={handleImageClick} src={currentUser.image ?? "https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg"} circular size='small'/>
                         <h3>{currentUser.realname}</h3>
                         <p>{currentUser.bio}</p>
+                    </Menu.Item>
+
+                    <Menu.Item
+                        style={{ color: 'white' }}
+                        name='edit'
+                        onClick={() => history.push('/home')}
+                    >
+                        <Icon name='home' />
+                        Dashboard
                     </Menu.Item>
 
                     <Menu.Item

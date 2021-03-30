@@ -1,4 +1,4 @@
-import { Button, Image, Modal, Form, Input, TextArea } from 'semantic-ui-react'
+import { Button, Image, Modal, Form, Input, TextArea, Icon } from 'semantic-ui-react'
 import { useState } from 'react'
 
 function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
@@ -47,7 +47,15 @@ function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
             size='tiny'
             // trigger={<Button>Show Modal</Button>}
         >
-            <Modal.Header>Update Profile</Modal.Header>
+            <Modal.Header>Update Profile
+            <Icon 
+                link
+                onClick={() => setModal(false)}
+                style={{float: 'right'}}
+                size='large'
+                name="x"
+                />
+            </Modal.Header>
             <Modal.Content image>
                 <Image size='small' src={formData.image} alt={username} wrapped />
                 <Modal.Description>
@@ -84,9 +92,9 @@ function EditProfileModal({ setModal, modal, currentUser, setCurrentUser }) {
                 </Modal.Description>
             </Modal.Content>
             <Modal.Actions>
-                <Button color='black' onClick={() => setModal(false)}>
+                {/* <Button color='black' onClick={() => setModal(false)}>
                 Cancel
-                </Button>
+                </Button> */}
                 {/* <Button
                 type='submit'
                 content='Update Profile'

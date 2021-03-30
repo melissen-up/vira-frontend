@@ -2,7 +2,7 @@ import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
-function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, practiceCards }) {
+function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, practiceCards, handlePracticeCreate }) {
         
     const [open, setOpen] = useState({modal});
     const history = useHistory();
@@ -32,6 +32,7 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, pra
                 })
                 .then((r) => r.json())
                 .then((practice) => {
+                handlePracticeCreate(practice);
                 setModal(false)
                 setFormData(
                     {
@@ -41,7 +42,7 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, pra
                         name: ""
                     }
                 )
-                history.push("/")
+                history.push("/practices")
                 });
             } else {
                 console.log("No Token");
