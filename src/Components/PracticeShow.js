@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import PracticePoseCard from './PracticePoseCard'
 
-import { Icon, Segment, Item, Container } from 'semantic-ui-react'
+import { Icon, Segment, Item, Button } from 'semantic-ui-react'
 
 
 function PracticeShow({ handlePracticeDelete }) {
@@ -32,11 +32,6 @@ function PracticeShow({ handlePracticeDelete }) {
         .then((practice) => handlePracticeDelete(practice.id))
         history.push(`/practices`);
     }
-    console.log(practice);
-
-    // const poseCards = practice.poses.map((pPose) => {
-    //     return <PracticePoseCard pPose={pPose} key={pPose.id} />
-    // })
 
     function handlePoseShow() {
 
@@ -46,16 +41,9 @@ function PracticeShow({ handlePracticeDelete }) {
 
     return (
         <>
-            <Segment style={{ margin: '15px' }}>
+            <Segment style={{ margin: '15px' }} textAlign='right'>
                 <h1>{practice.name}</h1>
-                <Icon 
-                link
-                onClick={handleDeleteClick}
-                style={{float: 'right'}}
-                size='large'
-                name="x"
-                />
-                <h4>Description: {practice.description}</h4>
+                <h4 style={{ color: 'rgba(0,0,0,.6)'}}>Description: {practice.description}</h4>
             </Segment>
 
             <Item.Group divided>
@@ -64,6 +52,18 @@ function PracticeShow({ handlePracticeDelete }) {
                     })
                 }
             </Item.Group>
+
+            <Segment padded style={{ margin: '10px' }}>
+                <div style={{ 'text-align': 'center'}}>
+                        <Button 
+                            onClick={() => handleDeleteClick()} 
+                            color='violet' 
+                            content='Delete Practice'
+                            icon='x'
+                            labelPosition='left'
+                        />
+                </div>
+            </Segment>
         </>
     )
 };

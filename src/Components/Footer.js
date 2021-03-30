@@ -11,34 +11,31 @@ import {
 function Footer() {
     return (
         <>
-            <Segment inverted vertical color='violet' style={{ padding: '2em 0em'}}>
+            <Segment inverted tertiary vertical color='violet' style={{ padding: '2em 0em'}}>
                 <Container>
                     <Grid divided inverted stackable>
                     <Grid.Row>
                         <Grid.Column width={3}>
-                        <Header inverted as='h4' content='About' />
+                        <Header inverted as='h4' content='Project' />
                         <List link inverted>
-                            <List.Item as='a'>Sitemap</List.Item>
-                            <List.Item as='a'>Contact Us</List.Item>
-                            <List.Item as='a'>Religious Ceremonies</List.Item>
-                            <List.Item as='a'>Gazebo Plans</List.Item>
+                            <List.Item as='a'>Project</List.Item>
+                            <List.Item as='a'>Repos</List.Item>
+                            <List.Item as='a'>Credits</List.Item>
                         </List>
                         </Grid.Column>
                         <Grid.Column width={3}>
-                        <Header inverted as='h4' content='Services' />
+                        <Header inverted as='h4' content='Creator' />
                         <List link inverted>
-                            <List.Item as='a'>Banana Pre-Order</List.Item>
-                            <List.Item as='a'>DNA FAQ</List.Item>
-                            <List.Item as='a'>How To Access</List.Item>
-                            <List.Item as='a'>Favorite X-Men</List.Item>
+                            <List.Item as='a'>GitHub</List.Item>
+                            <List.Item as='a'>LinkedIn</List.Item>
                         </List>
                         </Grid.Column>
                         <Grid.Column width={7}>
                         <Header as='h4' inverted>
-                            Footer Header
+                            Vira
                         </Header>
                         <p>
-                            Extra space for a call to action inside the footer that could help re-engage users.
+                            Vira was created in March of 2021 as the capstone project for Phase 5 of Flatiron School's Software Engineering Program.
                         </p>
                         </Grid.Column>
                     </Grid.Row>

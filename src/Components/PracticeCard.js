@@ -9,7 +9,7 @@ function PracticeCard({ practice }) {
     return (
         <>
             <Card>
-                <Card.Content>
+                <Card.Content style={{'text-align': 'center'}}>
                     {/* <Icon
                     link
                     onClick={handlePracticeRemove}

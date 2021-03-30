@@ -1,18 +1,45 @@
 
-import { Button, Segment } from 'semantic-ui-react'
+import { Button, Segment, Card, Header } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
+import PracticeCard from './PracticeCard';
+
+// import { Card } from '@material-ui/core';
 
 
-function Dashboard({ setShowCreate }) {
+function Dashboard({ practiceData }) {
     const history = useHistory();
+    const [startIndex, setStartIndex] = useState(0);
+
+    const practiceComponents = practiceData
+        .slice(startIndex, startIndex + 3)
+        .map((practice) => {
+            return (
+                <PracticeCard 
+                    key={practice.id}
+                    practice={practice}
+                />
+            );
+        });
 
     return (
         <>
-            <h1>DASHBOARD</h1>
 
-            <Segment></Segment>
+            <Segment style={{ 'margin-top': '10px' }}>
+                <Header as='h1' color='yellow'>
+                    Explore Practices
+                </Header>
+
+                <Card.Group>
+                    {practiceComponents}
+                </Card.Group>
+            </Segment>
             
-            <Segment></Segment>
+            <Segment>
+                <Header as='h1' color='yellow'>
+                    Explore Teachers
+                </Header>
+            </Segment>
 
             <Segment textAlign='center'>
                 <Button 

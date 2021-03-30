@@ -3,7 +3,11 @@ import { Button, Checkbox, Form, Container, Header, Input, Image, Segment, Divid
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Login({ setCurrentUser }) {
+// Logo
+import logo from '../assets/vira-logo.png';
+
+
+function Login({ setCurrentUser, setLogin }) {
     // state
     const [loginInfo, setLoginInfo]= useState({username:"", password:""})
     const history = useHistory();
@@ -33,13 +37,11 @@ function Login({ setCurrentUser }) {
                         }
                     })
                     .then((data) => {
-                        // set the user in state
                         setCurrentUser(data.teacher);
-                        // save the token!
                         localStorage.setItem("token", data.token);
                         setLoginInfo({username:"", password:""});
                         setErrors([]);
-                        // callGetOthersUseEffect(data.user);
+                        setLogin(true);
                     })
                     .catch((data) => {
                         setErrors(data.errors);
@@ -53,11 +55,11 @@ function Login({ setCurrentUser }) {
     }
 
     return(
-        <>
+        < div class='login'>
         <Container>
-            <Segment textAlign='center'>
+            <Segment textAlign='center' style={{ margin: '50px' }}>
+                    <Image src={logo} centered/>
                 <Header as='h2' icon textAlign='center'>
-                    <Image src="../assets/vira-logo.png" />
                     <Header.Content>Login</Header.Content>
                 </Header>
                 <Form onSubmit={(e) => handleSubmit(e)}>
@@ -91,7 +93,7 @@ function Login({ setCurrentUser }) {
                 />
             </Segment>
         </Container>
-        </>
+        </div>
     );
 };
 

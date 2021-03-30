@@ -22,17 +22,7 @@ function PracticePoseCard({ pPose, setShowPose, handlePoseShow }) {
         handlePoseShow(id);
     };
 
-    // const showPose 
-
     return (
-        // <Button
-        //     // onClick={}
-        //     inverted
-        //     style={{ 'text-align': 'center', margin: '5px', 'background-color': '#2d18f0'}}
-        //     content={ name_english }
-        //     description={ name_sanskrit }
-        //     onClick={() => onShowClick}
-        // />
         <>
             <Item>
                 <Item.Image size='small' src={image} />

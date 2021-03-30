@@ -6,7 +6,7 @@ import PoseContainer from './PoseContainer'
 import PracticeBuild from './PracticeBuild'
 
 import { Segment, Button, Header, Card, Icon } from 'semantic-ui-react'
-import CreatePracticeModal from "./CreatePracticeModal";
+import CreatePracticeModal from "./SavePracticeModal";
 
 
 function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, handlePracticeCreate }) {
@@ -54,13 +54,6 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, h
         <>
         { modal === true ? <CreatePracticeModal handlePracticeCreate={handlePracticeCreate} currentUser={currentUser} setCurrentUser={setCurrentUser} modal={modal} setModal={setModal} practiceCards={practiceCards} /> : null}
         <CategoryContainer catData={catData} handleCategoryClick={handleCategoryClick} />
-
-        {/* <div style={{ 'text-align': 'center'}}>
-            <Button 
-                onClick={handleCategoryClick}
-                content='Click for Poses'
-            />
-        </div> */}
                     
         <Segment padded>
             <Header as='h2'>Practice</Header>
@@ -77,7 +70,7 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, h
             <div style={{ 'text-align': 'center'}}>
                 <Button.Group>
                     <Button
-                        onClick={() => history.push("/Dashboard")}
+                        onClick={() => history.push("/home")}
                         content='Cancel'
                     />
                     <Button.Or />

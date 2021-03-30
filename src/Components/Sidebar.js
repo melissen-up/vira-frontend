@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import EditProfileModal from './EditProfileModal'
 
-function Sidebar({ setCurrentUser, currentUser }) {
+function Sidebar({ setCurrentUser, currentUser, setLogin }) {
     const history = useHistory();
     const [ modal, setModal ] = useState(false)
 
@@ -16,7 +16,7 @@ function Sidebar({ setCurrentUser, currentUser }) {
             bio: ""
         });
         localStorage.removeItem("token");
-        history.push('/login');
+        setLogin(false);
     };
 
     function handleImageClick() {

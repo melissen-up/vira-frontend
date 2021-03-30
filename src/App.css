@@ -1,4 +1,11 @@
-.App {
+.login {
+  background-color: #5829bb;
+}
+
+
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +42,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
