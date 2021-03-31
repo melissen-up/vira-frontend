@@ -21,7 +21,7 @@ import SavedPracticeShow from "./SavedPracticeShow"
 import logoSmall from '../assets/vira-logo.png';
 
 // Styling
-import { Grid, Image, Container } from 'semantic-ui-react'
+import { Grid, Image, Container, Sticky } from 'semantic-ui-react'
 
 
 function App() {
@@ -29,7 +29,9 @@ function App() {
   const history = useHistory();
   const [ catData, setCatData ] = useState([]);
   const [ practiceData, setPracticeData ] = useState([]);
-  const [ login, setLogin ] = useState(false)
+  const [ teacherData, setTeacherData ] = useState([]);
+  const [ login, setLogin ] = useState(false);
+  const [ signup, setSignup ] = useState(false);
   const [ currentUser, setCurrentUser ] = useState({
     username: "",
     realname: "",
@@ -49,9 +51,7 @@ function App() {
         .then((r) => r.json())
         .then((user) => {
           setCurrentUser(user)
-          setLogin(true)
-          // history.push("/home");
-          
+          setLogin(true)  
         })
     } else {
       setLogin(false)
@@ -73,9 +73,17 @@ function App() {
       fetch("http://localhost:3000/practice/index")
           .then((r) => r.json())
           .then((practices) => {
-              console.log(practices);
           setPracticeData(practices);
           });
+  }, []);
+
+  // fetch users
+  useEffect(() => {
+      fetch("http://localhost:3000/teacher/index")
+      .then((r) => r.json())
+      .then((teachers) => {
+        setTeacherData(teachers);
+      });
   }, []);
 
   function handlePracticeDelete(id) {
@@ -92,25 +100,37 @@ function App() {
   return (
     <>
       { login === false ?
-        <Login setCurrentUser={setCurrentUser} setLogin={setLogin} /> :
+        <div 
+          style={{
+            backgroundColor: '#5829bb',
+            height: '100%'
+            }}>
+          { 
+            signup === false ? 
+            <Login setCurrentUser={setCurrentUser} setLogin={setLogin} setSignup={setSignup} /> :
+            <Signup setCurrentUser={setCurrentUser} setLogin={setLogin} setSignup={setSignup} /> 
+          }
+        </div> :
         <>
-          <Grid>
+          <Grid >
             <Grid.Column width={4}>
+              <Sticky>
                 <Sidebar setCurrentUser={setCurrentUser} currentUser={currentUser} setLogin={setLogin} />
+              </Sticky>
             </Grid.Column>
 
             <Grid.Column width={10}>
               <Switch >
-                <Route exact path="/login" > 
+                {/* <Route exact path="/login" > 
                   <Login setCurrentUser={setCurrentUser} />
                 </Route> 
 
                 <Route exact path="/signup" > 
                   <Signup setCurrentUser={setCurrentUser} />
-                </Route> 
+                </Route>  */}
 
                 <Route path="/home" >
-                  <Dashboard practiceData={practiceData} currentUser={currentUser} />
+                  <Dashboard practiceData={practiceData} currentUser={currentUser} teacherData={teacherData} />
                 </Route>
 
                 <Route exact path="/create-practice">
@@ -130,7 +150,9 @@ function App() {
 
             <Grid.Column width={2} >
               <Container style={{ 'margin-top': '10px' }}>
-                <Image src={logoSmall} size='tiny' centered />
+                <Sticky>
+                  <Image src={logoSmall} size='tiny' centered />
+                </Sticky>
               </Container>
             </Grid.Column>
           </Grid>

@@ -50,7 +50,7 @@ function Sidebar({ setCurrentUser, currentUser, setLogin }) {
     return (
         <>
             { modal === true ? <EditProfileModal modal={modal} setModal={setModal} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : null }
-            <Sticky>
+
                 <Menu vertical style={{ margin: "10px", background: '#5829bb'}} >
                     <Menu.Item 
                         style={{ "text-align": "center", color: 'white' }}
@@ -99,7 +99,7 @@ function Sidebar({ setCurrentUser, currentUser, setLogin }) {
                         <Input icon='search' placeholder='Search other users...' />
                     </Menu.Item>
                 </Menu>
-            </Sticky>
+
         </>
     )
 };

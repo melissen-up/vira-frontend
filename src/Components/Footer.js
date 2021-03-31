@@ -12,16 +12,16 @@ import {
 function Footer() {
     return (
         <>
-            <Segment inverted tertiary vertical color='violet' style={{ padding: '2em 0em', 'margin-top': '2em'}}>
+            <Segment inverted tertiary vertical color='violet' style={{ padding: '2em', 'margin-top': '5em' }}>
                 <Container>
                     <Grid divided inverted stackable>
                     <Grid.Row>
                         <Grid.Column width={3}>
                         <Header inverted as='h4' content='Project' />
                         <List link inverted>
-                            <List.Item as='a'>Project</List.Item>
-                            <List.Item as='a'>Repos</List.Item>
+                            <List.Item as='a'>About</List.Item>
                             <List.Item as='a'>Credits</List.Item>
+                            <List.Item as='a'>Repos</List.Item>
                         </List>
                         </Grid.Column>
                         <Grid.Column width={3}>

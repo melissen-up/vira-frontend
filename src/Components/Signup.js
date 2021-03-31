@@ -1,9 +1,12 @@
-import { Button, Checkbox, Form, Container, Header, Input, Image, Segment, Divider } from 'semantic-ui-react'
+import { Button, Grid, Form, Header, Input, Image, Segment } from 'semantic-ui-react'
 
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
-function Signup({ setCurrentUser }) {
+// Logo
+import logo from '../assets/vira-logo.png';
+
+function Signup({ setCurrentUser, setSignup, setLogin }) {
     const [signupInfo, setSignupInfo]= useState({
         username:"", 
         password:"",
@@ -40,6 +43,7 @@ function Signup({ setCurrentUser }) {
                         setCurrentUser(data.teacher);
                         // save the token!
                         localStorage.setItem("token", data.token);
+                        setLogin(true);
                         
                         setErrors([]);
                         // callGetOthersUseEffect(data.user);
@@ -53,35 +57,42 @@ function Signup({ setCurrentUser }) {
 
     return (
         <>
-        <Container>
-            <Segment textAlign='center'>
-                <Header as='h2' icon textAlign='center'>
-                    <Image src="../assets/vira-logo.png" />
-                    <Header.Content>Signup</Header.Content>
-                </Header>
-                <Form onSubmit={(e) => handleSubmit(e)}>
-                    <Form.Field required>
-                        <label style={{ "text-align": "left" }}>Username</label>
-                        <Input placeholder='Username' name="username" value={signupInfo.username} onChange ={(e) =>handleChange(e)}/>
-                    </Form.Field>
-                    <Form.Field required>
-                        <label style={{ "text-align": "left" }}>Password</label>
-                        <Input type="password" placeholder="Password" name="password" value={signupInfo.password} onChange ={(e) =>handleChange(e)} />
-                    </Form.Field>
-                    <Form.Field required>
-                        <label style={{ "text-align": "left" }}>First Name</label>
-                        <Input type="realname" placeholder="First Name" name="realname" value={signupInfo.realname} onChange ={(e) =>handleChange(e)} />
-                    </Form.Field>
-                    <Button 
-                        type='submit'
-                        color='violet'
-                        content='Sign Up'
-                        icon='add'
-                        labelPosition='left'
-                    />
-                </Form>
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+                <Segment textAlign='center' raised>
+                    <Image src={logo} centered size='small' />
+                        <Form onSubmit={(e) => handleSubmit(e)}>
+                            <Form.Field required>
+                                <label style={{ "text-align": "left" }}>Username</label>
+                                <Input placeholder='Username' name="username" value={signupInfo.username} onChange ={(e) =>handleChange(e)}/>
+                            </Form.Field>
+                            <Form.Field required>
+                                <label style={{ "text-align": "left" }}>Password</label>
+                                <Input type="password" placeholder="Password" name="password" value={signupInfo.password} onChange ={(e) =>handleChange(e)} />
+                            </Form.Field>
+                            <Form.Field required>
+                                <label style={{ "text-align": "left" }}>First Name</label>
+                                <Input type="realname" placeholder="First Name" name="realname" value={signupInfo.realname} onChange ={(e) =>handleChange(e)} />
+                            </Form.Field>
+                            <Button 
+                                type='submit'
+                                color='violet'
+                                content='Sign Up'
+                                icon='add'
+                                labelPosition='left'
+                            />
+                        </Form>
+                        <br />
+                        <Link 
+                            to='/login'
+                            color='#5829bb' 
+                            onClick={() => setSignup(false)}
+                        >
+                            Nevermind, take me back to login
+                        </Link>
             </Segment>
-        </Container>
+            </Grid.Column>
+        </Grid>
         </>
     );
 };
