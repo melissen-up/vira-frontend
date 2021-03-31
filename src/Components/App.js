@@ -14,14 +14,14 @@ import Signup from "./Signup"
 import Sidebar from "./Sidebar";
 import CreatePractice from './CreatePractice'
 import Dashboard from './Dashboard'
-import Practices from "./Practices"
-import PracticeShow from "./PracticeShow"
+import Practices from "./SavedPractices"
+import SavedPracticeShow from "./SavedPracticeShow"
 
 // Logo
 import logoSmall from '../assets/vira-logo.png';
 
 // Styling
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid, Image, Container } from 'semantic-ui-react'
 
 
 function App() {
@@ -73,7 +73,7 @@ function App() {
       fetch("http://localhost:3000/practice/index")
           .then((r) => r.json())
           .then((practices) => {
-              // console.log(poses);
+              console.log(practices);
           setPracticeData(practices);
           });
   }, []);
@@ -91,7 +91,6 @@ function App() {
 
   return (
     <>
-
       { login === false ?
         <Login setCurrentUser={setCurrentUser} setLogin={setLogin} /> :
         <>
@@ -111,7 +110,7 @@ function App() {
                 </Route> 
 
                 <Route path="/home" >
-                  <Dashboard practiceData={practiceData} />
+                  <Dashboard practiceData={practiceData} currentUser={currentUser} />
                 </Route>
 
                 <Route exact path="/create-practice">
@@ -123,62 +122,22 @@ function App() {
                 </Route>
 
                 <Route exact path="/practice-show/:id">
-                  <PracticeShow currentUser={currentUser} handlePracticeDelete={handlePracticeDelete} />                    
+                  <SavedPracticeShow currentUser={currentUser} handlePracticeDelete={handlePracticeDelete} />                    
                 </Route>
 
               </Switch>
             </Grid.Column>
 
             <Grid.Column width={2} >
-              <Image src={logoSmall} tiny />
+              <Container style={{ 'margin-top': '10px' }}>
+                <Image src={logoSmall} size='tiny' centered />
+              </Container>
             </Grid.Column>
           </Grid>
 
           <Footer />
       </>
-      };
-
-      
-      {/* // <Grid>
-      //   <Grid.Column width={4}>
-      //       <Sidebar setCurrentUser={setCurrentUser} currentUser={currentUser} />
-      //   </Grid.Column>
-
-      //   <Grid.Column width={10}>
-      //     <Switch >
-      //       <Route exact path="/login" > 
-      //         <Login setCurrentUser={setCurrentUser} />
-      //       </Route> 
-
-      //       <Route exact path="/signup" > 
-      //         <Signup setCurrentUser={setCurrentUser} />
-      //       </Route> 
-
-      //       <Route path="/home" >
-      //         <Dashboard practiceData={practiceData} />
-      //       </Route>
-
-      //       <Route exact path="/create-practice">
-      //         <CreatePractice currentUser={currentUser} setCurrentUser={setCurrentUser} catData={catData} handlePracticeCreate={handlePracticeCreate} />
-      //       </Route>
-
-      //       <Route exact path="/practices">
-      //         <Practices currentUser={currentUser} practiceData={practiceData} />                    
-      //       </Route>
-
-      //       <Route exact path="/practice-show/:id">
-      //         <PracticeShow currentUser={currentUser} handlePracticeDelete={handlePracticeDelete} />                    
-      //       </Route>
-
-      //     </Switch>
-      //   </Grid.Column>
-
-      //   <Grid.Column width={2} >
-      //     <Image src={logoSmall} tiny />
-      //   </Grid.Column>
-      // </Grid>
-
-      // <Footer /> */}
+      }
   </>
   );
 }

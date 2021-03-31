@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import CategoryContainer from './CategoryContainer'
 import PoseContainer from './PoseContainer'
-import PracticeBuild from './PracticeBuild'
+// import PracticeBuild from './PracticeBuild'
 
 import { Segment, Button, Header, Card, Icon } from 'semantic-ui-react'
 import CreatePracticeModal from "./SavePracticeModal";

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {
+    Icon,
     Container,
     Grid,
     Header,
@@ -11,7 +12,7 @@ import {
 function Footer() {
     return (
         <>
-            <Segment inverted tertiary vertical color='violet' style={{ padding: '2em 0em'}}>
+            <Segment inverted tertiary vertical color='violet' style={{ padding: '2em 0em', 'margin-top': '2em'}}>
                 <Container>
                     <Grid divided inverted stackable>
                     <Grid.Row>
@@ -26,8 +27,10 @@ function Footer() {
                         <Grid.Column width={3}>
                         <Header inverted as='h4' content='Creator' />
                         <List link inverted>
-                            <List.Item as='a'>GitHub</List.Item>
-                            <List.Item as='a'>LinkedIn</List.Item>
+                            <List.Item as='a' href='https://github.com/melissen-up/' target='_blank'><Icon name='github' /> GitHub</List.Item>
+                            <List.Item as='a' href='https://www.linkedin.com/in/melissafaulner/' target='_blank'><Icon name='linkedin' />LinkedIn</List.Item>
+                            <List.Item as='a' href='https://twitter.com/la_melisma/' target='_blank'><Icon name='twitter' />Twitter</List.Item>
+                            <List.Item as='a' href='https://www.instagram.com/la_melisma/' target='_blank'><Icon name='instagram' />Instagram</List.Item>
                         </List>
                         </Grid.Column>
                         <Grid.Column width={7}>

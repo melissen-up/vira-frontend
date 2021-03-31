@@ -1,4 +1,4 @@
-import { Sticky, Menu, Input, Image, Icon } from 'semantic-ui-react'
+import { Image, Sticky, Menu, Input, Icon } from 'semantic-ui-react'
 import { useState } from 'react'
 import { useHistory } from "react-router-dom";
 
@@ -55,8 +55,14 @@ function Sidebar({ setCurrentUser, currentUser, setLogin }) {
                     <Menu.Item 
                         style={{ "text-align": "center", color: 'white' }}
                     >
-                        <Image onClick={handleImageClick} src={currentUser.image ?? "https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg"} circular size='small'/>
-                        <h3>{currentUser.realname}</h3>
+                        <Image 
+                            style={{ 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' }}
+                            onClick={handleImageClick} 
+                            src={currentUser.image ?? "https://afmnoco.com/wp-content/uploads/2019/07/74046195_s.jpg"} 
+                            circular size='small' 
+                            centered
+                        />
+                        <h3 >{currentUser.realname}</h3>
                         <p>{currentUser.bio}</p>
                     </Menu.Item>
 

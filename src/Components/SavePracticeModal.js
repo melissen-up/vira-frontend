@@ -2,7 +2,7 @@ import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
-function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, practiceCards, handlePracticeCreate }) {
+function CreatePracticeModal({ setModal, modal, currentUser, practiceCards, handlePracticeCreate }) {
         
     const [open, setOpen] = useState({modal});
     const history = useHistory();
@@ -12,7 +12,7 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, pra
     } = currentUser
 
     const [formData, setFormData]= useState({
-        teacher_id: currentUser.id,
+        teacher_id: id,
         poses: practiceCards,
         description: "", 
         name: ""
@@ -36,7 +36,7 @@ function CreatePracticeModal({ setModal, modal, currentUser, setCurrentUser, pra
                 setModal(false)
                 setFormData(
                     {
-                        teacher_id: "",
+                        teacher_id: id,
                         poses: practiceCards,
                         description: "", 
                         name: ""

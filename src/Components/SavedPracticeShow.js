@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 
 import PracticePoseCard from './PracticePoseCard'
 
-import { Icon, Segment, Item, Button } from 'semantic-ui-react'
+import { Segment, Item, Button, Popup, Icon } from 'semantic-ui-react'
 
 
-function PracticeShow({ handlePracticeDelete }) {
+function SavedPracticeShow({ handlePracticeDelete, currentUser }) {
 
     const params = useParams();
     const practiceId = params.id;
@@ -14,27 +14,25 @@ function PracticeShow({ handlePracticeDelete }) {
 
     const [ practice, setPractice ] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [ showPose, setShowPose ] = useState([]);
-
+    const [ teacher, setTeacher ] = useState([]);
 
     useEffect(() => {
         fetch(`http://localhost:3000/practice/${practiceId}`)
         .then((r) => r.json())
-        .then((practice) => {
-            setPractice(practice);
+        .then((res) => {
+            setPractice(res.practice);
+            setTeacher(res.teacher)
             setIsLoaded(true);
         });
     }, [practiceId]);
+    
+    console.log(params.id);
 
     function handleDeleteClick(e) {
         fetch(`http://localhost:3000/practice/${params.id}`, { method: "DELETE" })
-        .then((response) => response.json())
-        .then((practice) => handlePracticeDelete(practice.id))
+        .then((res) => res.json())
+        .then((res) => handlePracticeDelete(res.id))
         history.push(`/practices`);
-    }
-
-    function handlePoseShow() {
-
     }
 
     if (!isLoaded) return <h2>Loading...</h2>;
@@ -43,16 +41,38 @@ function PracticeShow({ handlePracticeDelete }) {
         <>
             <Segment style={{ margin: '15px' }} textAlign='right'>
                 <h1>{practice.name}</h1>
-                <h4 style={{ color: 'rgba(0,0,0,.6)'}}>Description: {practice.description}</h4>
+                
+                <h4 style={{ color: 'rgba(0,0,0,.6)'}}>
+                    { currentUser.id === teacher.id ? null : 
+                    <>
+                    Teacher: {teacher.realname} <nb />
+                    <Popup
+                        trigger={
+                            <Icon name='info circle' />
+                        }
+                        position='top center'
+
+                    >
+                        <Popup.Header>{teacher.realname} | {teacher.username}</Popup.Header>
+                        <Popup.Content>
+                            {teacher.bio}
+                        </Popup.Content>
+                    </Popup>
+                    </>      
+                    }
+                    <br/>
+                    Description: {practice.description}
+                </h4>
             </Segment>
 
             <Item.Group divided>
                 {practice.poses.map((pPose) => {
-                        return <PracticePoseCard key={pPose.id} pPose={pPose} setShowPose={setShowPose} handlePoseShow={handlePoseShow} />
+                        return <PracticePoseCard key={pPose.id} pPose={pPose} />
                     })
                 }
             </Item.Group>
-
+            
+            { currentUser.id === practice.teacher_id ? 
             <Segment padded style={{ margin: '10px' }}>
                 <div style={{ 'text-align': 'center'}}>
                         <Button 
@@ -63,9 +83,11 @@ function PracticeShow({ handlePracticeDelete }) {
                             labelPosition='left'
                         />
                 </div>
-            </Segment>
+            </Segment> :
+            null }
+            
         </>
     )
 };
 
-export default PracticeShow
+export default SavedPracticeShow
