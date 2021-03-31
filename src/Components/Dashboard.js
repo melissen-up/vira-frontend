@@ -11,11 +11,7 @@ function Dashboard({ practiceData, teacherData, currentUser }) {
     const history = useHistory();
     const [startIndex, setStartIndex] = useState(0);
 
-    console.log(practiceData);
-
     const notUserPractices = practiceData.filter((practice) => practice.teacher_id !== currentUser.id)
-
-    console.log(notUserPractices);
 
     const practiceComponents = notUserPractices
         .slice(startIndex, startIndex + 3)
@@ -43,8 +39,12 @@ function Dashboard({ practiceData, teacherData, currentUser }) {
                     size='mini'
                     src={teacher.image}
                     />
-                    <Card.Header>{teacher.name}</Card.Header>
-                    <Card.Meta>User since <br />{year}</Card.Meta>
+                    <Card.Header>{teacher.realname}</Card.Header>
+                    <Card.Meta>
+                        Username: {teacher.username}
+                        <br />
+                        User since {year}
+                    </Card.Meta>
                     <Card.Description>
                     {teacher.bio}
                     </Card.Description>

@@ -5,11 +5,11 @@ import { useState } from 'react'
 import PoseCard from './PoseCard';
 
 
-function PracticePoseCard({ pPose, setShowPose }) {
+function PracticePoseCard({ pPose, handleRemovePoseClick, currentUser, teacher }) {
     const history = useHistory();
 
     const {
-        teacher_id,
+        id,
         image,
         breaths,
         name_english,
@@ -17,9 +17,10 @@ function PracticePoseCard({ pPose, setShowPose }) {
         description
     } = pPose
 
-    function onShowClick() {
-        setShowPose(pPose);
-    };
+    // function onShowClick() {
+    //     setShowPose(pPose);
+    // };
+
 
     return (
         <>
@@ -31,7 +32,16 @@ function PracticePoseCard({ pPose, setShowPose }) {
                     <Item.Meta>Breaths: {breaths}</Item.Meta>
                     <Item.Description>{description}</Item.Description>
                     <Item.Extra>
-                    <Button floated='right'>Remove Pose</Button>
+                        {
+                            currentUser.id === teacher.id  ??
+                            <Button 
+                                floated='right'
+                                onClick={() => handleRemovePoseClick(id)}
+                            >
+                                Remove Pose
+                            </Button>
+                        }
+                    
                     </Item.Extra>
                 </Item.Content>
             </Item>

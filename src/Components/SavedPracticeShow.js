@@ -13,6 +13,7 @@ function SavedPracticeShow({ handlePracticeDelete, currentUser }) {
     const history = useHistory();
 
     const [ practice, setPractice ] = useState([]);
+    const [ poses, setPoses ] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [ teacher, setTeacher ] = useState([]);
 
@@ -21,12 +22,12 @@ function SavedPracticeShow({ handlePracticeDelete, currentUser }) {
         .then((r) => r.json())
         .then((res) => {
             setPractice(res.practice);
+            setPoses(res.practice.poses)
             setTeacher(res.teacher)
             setIsLoaded(true);
         });
     }, [practiceId]);
     
-    console.log(params.id);
 
     function handleDeleteClick(e) {
         fetch(`http://localhost:3000/practice/${params.id}`, { method: "DELETE" })
@@ -34,6 +35,30 @@ function SavedPracticeShow({ handlePracticeDelete, currentUser }) {
         .then((res) => handlePracticeDelete(res.id))
         history.push(`/practices`);
     }
+
+    function handleRemovePoseClick(poseID) {
+        const updateParams = { 
+            practice: params.id,
+            pose: poseID
+        }
+        const token = localStorage.getItem("token");
+        if (token) {
+        console.log(poseID);
+        fetch(`http://localhost:3000/practice/${params.id}/update-poses/${poseID}`, {
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(updateParams),
+            })
+            .then((r) => r.json())
+            .then((res) => {
+                const updatedPoses = practice.poses.filter((pose) => pose.id !== res )
+                setPoses(updatedPoses);
+            });
+        }
+    };
 
     if (!isLoaded) return <h2>Loading...</h2>;
 
@@ -66,8 +91,14 @@ function SavedPracticeShow({ handlePracticeDelete, currentUser }) {
             </Segment>
 
             <Item.Group divided>
-                {practice.poses.map((pPose) => {
-                        return <PracticePoseCard key={pPose.id} pPose={pPose} />
+                {poses.map((pPose) => {
+                        return <PracticePoseCard 
+                                    key={pPose.id} 
+                                    pPose={pPose} 
+                                    handleRemovePoseClick={handleRemovePoseClick}
+                                    currentUser={currentUser}
+                                    teacher={teacher}
+                                />
                     })
                 }
             </Item.Group>
