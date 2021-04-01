@@ -38,7 +38,7 @@ function Sidebar({ setCurrentUser, currentUser, setLogin }) {
                     style={{ color: 'white' }} 
                     name='show' 
                     onClick={handleShowUserPractices}>
-                <Icon name='plus'/>
+                <Icon name='book'/>
                 Saved Practices
                 </Menu.Item>
             </>
@@ -75,6 +75,8 @@ function Sidebar({ setCurrentUser, currentUser, setLogin }) {
                         Dashboard
                     </Menu.Item>
 
+                    {practiceBtnLogic}
+                    
                     <Menu.Item
                         style={{ color: 'white' }}
                         name='edit'
@@ -84,7 +86,6 @@ function Sidebar({ setCurrentUser, currentUser, setLogin }) {
                         Edit Profile
                     </Menu.Item>
 
-                    {practiceBtnLogic}
 
                     <Menu.Item
                         style={{ color: 'white' }}

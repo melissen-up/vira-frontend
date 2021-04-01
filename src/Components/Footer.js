@@ -19,9 +19,9 @@ function Footer() {
                         <Grid.Column width={3}>
                         <Header inverted as='h4' content='Project' />
                         <List link inverted>
-                            <List.Item as='a'>About</List.Item>
-                            <List.Item as='a'>Credits</List.Item>
-                            <List.Item as='a'>Repos</List.Item>
+                            <List.Item as='a' >About</List.Item>
+                            <List.Item as='a' href='https://github.com/melissen-up/vira-frontend' target='_blank'><Icon name='github'/>Frontend</List.Item>
+                            <List.Item as='a' href='https://github.com/melissen-up/vira-backend' target='_blank'><Icon name='github'/>Backend</List.Item>
                         </List>
                         </Grid.Column>
                         <Grid.Column width={3}>
