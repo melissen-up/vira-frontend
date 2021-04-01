@@ -57,6 +57,8 @@ function Signup({ setCurrentUser, setSignup, setLogin }) {
 
     return (
         <>
+        <style>{'body { background-color: #5829bb; }'}</style>
+
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
                 <Segment textAlign='center' raised>

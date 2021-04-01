@@ -82,9 +82,9 @@ function CreatePractice({ catData, currentUser, setCurrentUser, handlePracticeCr
         <PoseContainer poseData={poseData} addPracticeCard={addPracticeCard} searchResults={searchResults} /> :
         null }
 
-        <Divider horizontal>Or</Divider>
+        {/* <Divider horizontal>Or</Divider> */}
 
-        <Grid textAlign='center' >
+        {/* <Grid textAlign='center' >
             <Grid.Column style={{ maxWidth: 300 }} >
                 <Input 
                     fluid 
@@ -94,7 +94,7 @@ function CreatePractice({ catData, currentUser, setCurrentUser, handlePracticeCr
                     onChange={handleChange}
                 />    
             </Grid.Column>    
-        </Grid>      
+        </Grid>       */}
         
         <Segment padded>
             <Header as='h2'>Practice</Header>

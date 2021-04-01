@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-// import './App.css';
+import '../App.css';
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
