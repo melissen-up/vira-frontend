@@ -51,7 +51,10 @@ function Dashboard({ practiceData, teacherData, currentUser }) {
                 </Card.Content>
                 <Card.Content extra style={{'text-align': 'center'}}>
                     <div>
-                    <Button basic color='yellow'>
+                    <Button 
+                        basic color='yellow'
+                        // onClick={() => }
+                    >
                         View Practices
                     </Button>
                     </div>
@@ -62,7 +65,7 @@ function Dashboard({ practiceData, teacherData, currentUser }) {
 
     return (
         <>
-            <Segment style={{ 'margin-top': '5em' }}>
+            <Segment style={{ 'margin-top': '5em', 'min-width': '225px' }}>
                 <Header as='h1' color='yellow'>
                     Explore Practices
                 </Header>

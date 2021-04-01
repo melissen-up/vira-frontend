@@ -1,28 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import CategoryContainer from './CategoryContainer'
 import PoseContainer from './PoseContainer'
 // import PracticeBuild from './PracticeBuild'
 
-import { Segment, Button, Header, Card, Icon } from 'semantic-ui-react'
+import { Segment, Button, Header, Card, Icon, Input, Divider, Grid } from 'semantic-ui-react'
 import CreatePracticeModal from "./SavePracticeModal";
 
-
-function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, handlePracticeCreate }) {
+function CreatePractice({ catData, currentUser, setCurrentUser, handlePracticeCreate, initPoseData }) {
 
     const [ clickedCat, setClickedCat ] = useState(0);
     const [ practiceCards, setPracticeCards ] = useState([]);
     const [ modal, setModal ] = useState(false)
-    const [ poseData, setPoseData ] = useState([]);
+    const [ poseData, setPoseData ] = useState([]); 
 
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const handleChange = event => {
+        setSearchTerm(event.target.value);
+    };
+
+    console.log(searchTerm);
     const history = useHistory();
+
+    useEffect(() => {
+        const results = initPoseData.filter(pose => (
+            pose.name_english.toString().toLowerCase().includes(searchTerm)
+            // console.log(pose.name_english.toString().toLowerCase())
+        ));
+        setSearchResults(results);
+    }, [searchTerm])
 
     function handleCategoryClick(id) {        
         fetch(`http://localhost:3000/category/${id}`)
             .then((r) => r.json())
             .then((cat) => {
-              // console.log(poses);
             setPoseData(cat.poses);
             });
     };
@@ -33,12 +46,19 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, h
     }
 
     const practicePoseCards = practiceCards.map((pCard) => {
-        return <Card 
-                raised 
-                header={pCard.name_english} 
-                description={pCard.name_sanskrit}
-                meta={<Icon color='grey' onClick={() => handlePoseRemoveClick(pCard)} size='small' name='x' style={{ float: 'right'}}/>} 
-            />
+        return (
+            <Card>
+                <Card.Content>
+                <Card.Header>
+                    <Icon color='grey' onClick={() => handlePoseRemoveClick(pCard)} size='small' name='x' style={{ float: 'right'}}/>
+                    {pCard.name_english}
+                </Card.Header>
+                <Card.Description>
+                    {pCard.name_sanskrit}
+                </Card.Description>
+                </Card.Content>
+            </Card>
+        )
     });
 
     function handlePoseRemoveClick(pose) {
@@ -53,8 +73,29 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, h
     return (
         <>
         { modal === true ? <CreatePracticeModal handlePracticeCreate={handlePracticeCreate} currentUser={currentUser} setCurrentUser={setCurrentUser} modal={modal} setModal={setModal} practiceCards={practiceCards} /> : null}
+
         <CategoryContainer catData={catData} handleCategoryClick={handleCategoryClick} />
-                    
+
+        <Divider />
+
+        { clickedCat !== [] ?
+        <PoseContainer poseData={poseData} addPracticeCard={addPracticeCard} searchResults={searchResults} /> :
+        null }
+
+        <Divider horizontal>Or</Divider>
+
+        <Grid textAlign='center' >
+            <Grid.Column style={{ maxWidth: 300 }} >
+                <Input 
+                    fluid 
+                    icon='search' 
+                    placeholder='Search Pose by Name ...'
+                    value={searchTerm}
+                    onChange={handleChange}
+                />    
+            </Grid.Column>    
+        </Grid>      
+        
         <Segment padded>
             <Header as='h2'>Practice</Header>
             <Card.Group itemsPerRow={4}>
@@ -62,9 +103,6 @@ function CreatePractice({ catData, setShowCreate, currentUser, setCurrentUser, h
             </Card.Group>
         </Segment>
 
-        { clickedCat !== [] ?
-        <PoseContainer poseData={poseData} addPracticeCard={addPracticeCard} /> :
-        null }
 
         <Segment >
             <div style={{ 'text-align': 'center'}}>

@@ -21,7 +21,7 @@ function PracticePoseCard({ pPose, handleRemovePoseClick, currentUser, teacher }
     //     setShowPose(pPose);
     // };
 
-
+    console.log(currentUser);
     return (
         <>
             <Item>
@@ -33,13 +33,14 @@ function PracticePoseCard({ pPose, handleRemovePoseClick, currentUser, teacher }
                     <Item.Description>{description}</Item.Description>
                     <Item.Extra>
                         {
-                            currentUser.id === teacher.id  ??
+                            currentUser.id === teacher.id  ?
                             <Button 
                                 floated='right'
                                 onClick={() => handleRemovePoseClick(id)}
                             >
                                 Remove Pose
-                            </Button>
+                            </Button> :
+                            null
                         }
                     
                     </Item.Extra>

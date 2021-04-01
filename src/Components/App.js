@@ -29,6 +29,7 @@ function App() {
   const history = useHistory();
   const [ catData, setCatData ] = useState([]);
   const [ practiceData, setPracticeData ] = useState([]);
+  const [ initPoseData, setInitPoseData ] = useState([]);
   const [ teacherData, setTeacherData ] = useState([]);
   const [ login, setLogin ] = useState(false);
   const [ signup, setSignup ] = useState(false);
@@ -67,6 +68,16 @@ function App() {
           setCatData(categories);
           });
   }, []);
+
+   // fetch poses
+  useEffect(() => {
+    fetch("http://localhost:3000/pose/index")
+        .then((r) => r.json())
+        .then((poses) => {
+          // console.log(poses);
+        setInitPoseData(poses);
+        });
+}, []);
 
   // fetch practices
   useEffect(() => {
@@ -113,28 +124,20 @@ function App() {
         </div> :
         <>
           <Grid >
-            <Grid.Column width={4}>
+            <Grid.Column width={3}>
               <Sticky>
                 <Sidebar setCurrentUser={setCurrentUser} currentUser={currentUser} setLogin={setLogin} />
               </Sticky>
             </Grid.Column>
 
-            <Grid.Column width={10}>
+            <Grid.Column width={11}>
               <Switch >
-                {/* <Route exact path="/login" > 
-                  <Login setCurrentUser={setCurrentUser} />
-                </Route> 
-
-                <Route exact path="/signup" > 
-                  <Signup setCurrentUser={setCurrentUser} />
-                </Route>  */}
-
                 <Route path="/home" >
                   <Dashboard practiceData={practiceData} currentUser={currentUser} teacherData={teacherData} />
                 </Route>
 
                 <Route exact path="/create-practice">
-                  <CreatePractice currentUser={currentUser} setCurrentUser={setCurrentUser} catData={catData} handlePracticeCreate={handlePracticeCreate} />
+                  <CreatePractice currentUser={currentUser} setCurrentUser={setCurrentUser} catData={catData} initPoseData={initPoseData} handlePracticeCreate={handlePracticeCreate} />
                 </Route>
 
                 <Route exact path="/practices">
