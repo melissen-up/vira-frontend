@@ -40,6 +40,8 @@ function App() {
     bio: ""
   });
 
+
+
   // auto-login
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -154,7 +156,11 @@ function App() {
             <Grid.Column width={2} >
               <Container style={{ 'margin-top': '10px' }}>
                 <Sticky>
-                  <Image src={logoSmall} size='tiny' centered />
+                  <Image 
+                    src={logoSmall} 
+                    size='tiny'
+                    onClick={() => history.push('/home')}
+                    centered />
                 </Sticky>
               </Container>
             </Grid.Column>

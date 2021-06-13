@@ -21,7 +21,6 @@ function Practices({ practiceData, currentUser }) {
                 <Card.Group centered >
                     {practiceCard}
                 </Card.Group>
-        
         </>
     )
 };

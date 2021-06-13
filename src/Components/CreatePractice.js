@@ -3,10 +3,10 @@ import { useHistory } from "react-router-dom";
 
 import CategoryContainer from './CategoryContainer'
 import PoseContainer from './PoseContainer'
+import CreatePracticeModal from "./SavePracticeModal";
 // import PracticeBuild from './PracticeBuild'
 
-import { Segment, Button, Header, Card, Icon, Input, Divider, Grid } from 'semantic-ui-react'
-import CreatePracticeModal from "./SavePracticeModal";
+import { Segment, Button, Header, Card, Icon, Divider } from 'semantic-ui-react'
 
 function CreatePractice({ catData, currentUser, setCurrentUser, handlePracticeCreate, initPoseData }) {
 
